@@ -6,7 +6,9 @@ import 'package:oepaga/theme/index.dart';
 
 class AppWrapper extends StatelessWidget {
   final Widget body;
-  const AppWrapper({Key? key, required this.body}) : super(key: key);
+  final String? idBilling;
+  const AppWrapper({Key? key, required this.body, this.idBilling})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,8 @@ class AppWrapper extends StatelessWidget {
           color: ThemeColors.white,
           padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
           child: body),
-      /* bottomNavigationBar:
-          mainScreens.contains(router.location) ? const Navbar() : null, */
+      bottomNavigationBar:
+          idBilling != null ? BottomNavbar(idBilling: idBilling!) : null,
     );
   }
 }

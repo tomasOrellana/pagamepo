@@ -17,7 +17,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(getAppBarTitle(title)),
+      title: Text(getAppBarTitle(title, context)),
       leading: isSubPage
           ? IconButton(
               icon: const Icon(Icons.arrow_back),

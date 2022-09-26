@@ -18,7 +18,7 @@ class ListScreen extends StatelessWidget {
             : ListView.builder(
                 itemCount: billsInfo.length,
                 itemBuilder: (context, index) {
-                  return billCard(bill: billsInfo[index]);
+                  return BillCard(bill: billsInfo[index]);
                 }));
   }
 }

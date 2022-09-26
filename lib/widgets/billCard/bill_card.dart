@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:oepaga/models/index.dart';
 import 'package:oepaga/theme/index.dart';
 
-class billCard extends StatelessWidget {
-  const billCard({
+class BillCard extends StatelessWidget {
+  const BillCard({
     Key? key,
     required this.bill,
   }) : super(key: key);
@@ -19,7 +20,7 @@ class billCard extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.blue.withAlpha(100),
         onTap: () {
-          debugPrint('Card tapped.');
+          context.push('/list/billing/${bill.id}');
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 12.0),
