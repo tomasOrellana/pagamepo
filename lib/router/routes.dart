@@ -31,7 +31,14 @@ final GoRouter router = GoRouter(
             path: 'billing/:id',
             pageBuilder: (context, state) {
               final String id = state.params['id']!;
-              return transitionBuilder(state, BillingScreen(id: id));
+              return transitionBuilder(state, ListBillingScreen(id: id));
+            },
+          ),
+          GoRoute(
+            path: 'billing/:id/new',
+            pageBuilder: (context, state) {
+              final String id = state.params['id']!;
+              return transitionBuilder(state, NewBillingScreen(id: id));
             },
           ),
         ]),

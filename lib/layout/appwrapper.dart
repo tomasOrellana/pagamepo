@@ -7,7 +7,9 @@ import 'package:oepaga/theme/index.dart';
 class AppWrapper extends StatelessWidget {
   final Widget body;
   final String? idBilling;
-  const AppWrapper({Key? key, required this.body, this.idBilling})
+  final FloatingActionButton? floatingActionButton;
+  const AppWrapper(
+      {Key? key, required this.body, this.idBilling, this.floatingActionButton})
       : super(key: key);
 
   @override
@@ -26,6 +28,7 @@ class AppWrapper extends StatelessWidget {
           color: ThemeColors.white,
           padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
           child: body),
+      floatingActionButton: floatingActionButton,
       bottomNavigationBar:
           idBilling != null ? BottomNavbar(idBilling: idBilling!) : null,
     );

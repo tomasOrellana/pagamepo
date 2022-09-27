@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oepaga/models/index.dart';
+import 'package:oepaga/providers/index.dart';
 import 'package:oepaga/theme/index.dart';
+import 'package:provider/provider.dart';
 
 class BillCard extends StatelessWidget {
   const BillCard({
@@ -20,6 +22,10 @@ class BillCard extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.blue.withAlpha(100),
         onTap: () {
+          final billProvider =
+              Provider.of<BillProvider>(context, listen: false);
+          billProvider.selectedBill = billProvider.billsInfo
+              .firstWhere((element) => element.id == bill.id);
           context.push('/list/billing/${bill.id}');
         },
         child: Padding(
