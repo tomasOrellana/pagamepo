@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:oepaga/providers/index.dart';
+import 'package:provider/provider.dart';
+
 final List<String> mainScreens = [
   AppPage.home.toPath,
   AppPage.listItem.toPath,
@@ -6,13 +10,15 @@ final List<String> mainScreens = [
   AppPage.options.toPath
 ];
 
-enum AppPage { home, members, newItem, listItem, profile, options }
+final List<String> subScreens = ['/list/'];
+
+enum AppPage { home, members, newItem, listItem, profile, options, billing }
 
 extension AppPageExtension on AppPage {
   String get toPath {
     switch (this) {
       case AppPage.home:
-        return '/home';
+        return '/';
       case AppPage.members:
         return '/members';
       case AppPage.newItem:
@@ -21,6 +27,8 @@ extension AppPageExtension on AppPage {
         return '/list';
       case AppPage.profile:
         return '/profile';
+      case AppPage.billing:
+        return '/billing';
       default:
         return '/list';
     }
@@ -40,6 +48,8 @@ extension AppPageExtension on AppPage {
         return 'profile';
       case AppPage.options:
         return 'options';
+      case AppPage.billing:
+        return 'billing';
       default:
         return 'home';
     }
@@ -59,13 +69,15 @@ extension AppPageExtension on AppPage {
         return 'Perfil';
       case AppPage.options:
         return 'Opciones';
+      case AppPage.billing:
+        return 'Cuenta';
       default:
         return 'Home';
     }
   }
 }
 
-String getAppBarTitle(String path) {
+String getAppBarTitle(String path, BuildContext context) {
   switch (path) {
     case '/home':
       return AppPage.home.toTitle;
@@ -79,7 +91,25 @@ String getAppBarTitle(String path) {
       return AppPage.options.toTitle;
     case '/profile':
       return AppPage.profile.toTitle;
+    case '/billing':
+      return AppPage.billing.toTitle;
     default:
-      return AppPage.listItem.toTitle;
+      String? routeParam;
+      for (final route in subScreens) {
+        if (path.contains('billing')) {
+          final id = path.split('/')[3];
+          final billProvider = Provider.of<BillProvider>(context);
+          final name = billProvider.billsInfo
+              .firstWhere((element) => element.id == id)
+              .name;
+          return name;
+        }
+        if (path.contains(route)) {
+          routeParam = path.split(route)[1];
+          routeParam = routeParam.split('/')[0];
+          return routeParam;
+        }
+      }
+      return path;
   }
 }

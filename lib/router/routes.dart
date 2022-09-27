@@ -12,20 +12,29 @@ final GoRouter router = GoRouter(
           transitionBuilder(state, const HomeScreen()),
     ),
     GoRoute(
-      path: AppPage.members.toPath,
-      pageBuilder: (context, state) =>
-          transitionBuilder(state, const MembersScreen()),
-    ),
-    GoRoute(
       path: AppPage.newItem.toPath,
       pageBuilder: (context, state) =>
           transitionBuilder(state, const NewScreen()),
     ),
     GoRoute(
-      path: AppPage.listItem.toPath,
-      pageBuilder: (context, state) =>
-          transitionBuilder(state, const ListScreen()),
-    ),
+        path: AppPage.listItem.toPath,
+        pageBuilder: (context, state) =>
+            transitionBuilder(state, const ListScreen()),
+        routes: [
+          GoRoute(
+              path: 'billing/:id/resume',
+              pageBuilder: (context, state) {
+                final String id = state.params['id']!;
+                return transitionBuilder(state, ResumeBillingScreen(id: id));
+              }),
+          GoRoute(
+            path: 'billing/:id',
+            pageBuilder: (context, state) {
+              final String id = state.params['id']!;
+              return transitionBuilder(state, BillingScreen(id: id));
+            },
+          ),
+        ]),
     GoRoute(
       path: AppPage.profile.toPath,
       pageBuilder: (context, state) =>
@@ -35,6 +44,6 @@ final GoRouter router = GoRouter(
       path: AppPage.options.toPath,
       pageBuilder: (context, state) =>
           transitionBuilder(state, const OptionsScreen()),
-    )
+    ),
   ],
 );

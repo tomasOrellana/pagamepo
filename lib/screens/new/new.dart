@@ -6,6 +6,9 @@ import 'package:oepaga/providers/index.dart';
 import 'package:oepaga/screens/new/form.dart';
 import 'package:oepaga/screens/new/header.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = const Uuid();
 
 class NewScreen extends StatefulWidget {
   const NewScreen({Key? key}) : super(key: key);
@@ -71,7 +74,8 @@ class _NewScreenState extends State<NewScreen> {
     final List<Member> newMembers = [
       ...values.map((e) => Member(name: e['name']))
     ];
-    final newBill = Bill(name: controllerName.value.text, members: newMembers);
+    final newBill = Bill(
+        id: uuid.v4(), name: controllerName.value.text, members: newMembers);
     billProvider.addBill(newBill);
     context.go('/list');
   }
