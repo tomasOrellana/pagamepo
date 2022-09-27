@@ -72,7 +72,7 @@ class _NewScreenState extends State<NewScreen> {
   void onPressNext() {
     final billProvider = Provider.of<BillProvider>(context, listen: false);
     final List<Member> newMembers = [
-      ...values.map((e) => Member(name: e['name']))
+      ...values.map((e) => Member(name: e['name'], id: uuid.v4()))
     ];
     final newBill = Bill(
         id: uuid.v4(), name: controllerName.value.text, members: newMembers);

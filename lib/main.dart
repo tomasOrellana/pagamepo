@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oepaga/providers/index.dart';
 import 'package:oepaga/router/routes.dart';
 import 'package:oepaga/theme/index.dart';
@@ -18,6 +19,8 @@ class MyApp extends StatelessWidget {
         ListenableProvider<BillProvider>(create: (_) => BillProvider()),
       ],
       child: MaterialApp.router(
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        supportedLocales: const [Locale('en'), Locale('es')],
         title: 'pagamepo',
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.light,

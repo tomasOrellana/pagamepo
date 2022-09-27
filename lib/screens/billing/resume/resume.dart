@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oepaga/layout/index.dart';
+import 'package:oepaga/screens/index.dart';
 
 class ResumeBillingScreen extends StatelessWidget {
   final String id;
@@ -7,7 +7,6 @@ class ResumeBillingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppWrapper(
-        idBilling: id, body: const SizedBox(child: Text('resume')));
+    return BillingScreen(id: id, body: const SizedBox(child: Text('resume')));
   }
 }
